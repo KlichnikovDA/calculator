@@ -228,6 +228,7 @@
             this.SinButton.TabIndex = 15;
             this.SinButton.Text = "sin(x)";
             this.SinButton.UseVisualStyleBackColor = true;
+            this.SinButton.Click += new System.EventHandler(this.SinButton_Click);
             // 
             // CosButton
             // 
@@ -238,6 +239,7 @@
             this.CosButton.TabIndex = 16;
             this.CosButton.Text = "cos(x)";
             this.CosButton.UseVisualStyleBackColor = true;
+            this.CosButton.Click += new System.EventHandler(this.CosButton_Click);
             // 
             // TgButton
             // 
@@ -248,6 +250,7 @@
             this.TgButton.TabIndex = 17;
             this.TgButton.Text = "tg(x)";
             this.TgButton.UseVisualStyleBackColor = true;
+            this.TgButton.Click += new System.EventHandler(this.TgButton_Click);
             // 
             // CtgButton
             // 
@@ -258,6 +261,7 @@
             this.CtgButton.TabIndex = 18;
             this.CtgButton.Text = "ctg(x)";
             this.CtgButton.UseVisualStyleBackColor = true;
+            this.CtgButton.Click += new System.EventHandler(this.CtgButton_Click);
             // 
             // ResultButton
             // 
@@ -336,7 +340,7 @@
             this.SecondButton.UseVisualStyleBackColor = true;
             this.SecondButton.Click += new System.EventHandler(this.SecondButton_Click_1);
             // 
-            // Test
+            // CalcForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -368,7 +372,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.InputTextBox);
-            this.Name = "Test";
+            this.Name = "CalcForm";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Test_Load);
             this.ResumeLayout(false);

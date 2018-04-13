@@ -13,19 +13,14 @@ namespace Calculator
 {
     public partial class CalcForm : Form
     {
-        public Regex rgx = new Regex(@"^([0-9\s+\-*/°′″]{1,})$");
+        public Regex rgx = new Regex(@"^(([0-9\s+\-*/()°′″]|(sin)|(cos)|(tg)|(ctg)){0,})$");
 
         public CalcForm()
         {
             InitializeComponent();
         }
 
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            TextBox.Clear();
-            InputTextBox.Clear();
-        }
-
+        //цифры
         private void button1_Click(object sender, EventArgs e)
         {   InputTextBox.Text += "1";   }
 
@@ -56,31 +51,113 @@ namespace Calculator
         private void button0_Click(object sender, EventArgs e)
         {   InputTextBox.Text += "0";   }
 
+        //значки углов: градус, минута, секунда
+        private void DegreeButton_Click(object sender, EventArgs e)
+        { InputTextBox.Text += " ° "; }
+
+        private void MunuteButton_Click(object sender, EventArgs e)
+        { InputTextBox.Text += " ′ "; }
+
+        private void SecondButton_Click_1(object sender, EventArgs e)
+        { InputTextBox.Text += " ″ "; }
+
+        //операции: сложение, вычитание, умножение, деление, тригонометрические функции
         private void PlusButton_Click(object sender, EventArgs e)
         {
-            InputTextBox.Text += " + ";
-            TextBox.Text += InputTextBox.Text;
-            InputTextBox.Clear();
+            if (!rgx.IsMatch(InputTextBox.Text))
+            {
+                MessageBox.Show("Введены недопустимые символы", "Ошибка!",
+                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InputTextBox.Clear();
+            }
+
+            else 
+            {
+                InputTextBox.Text += " + ";
+                TextBox.Text += InputTextBox.Text;
+                InputTextBox.Clear();
+            }
         }
 
         private void MinusButton_Click(object sender, EventArgs e)
         {
-            InputTextBox.Text += " - ";
-            TextBox.Text += InputTextBox.Text;
-            InputTextBox.Clear();
+            if (!rgx.IsMatch(InputTextBox.Text))
+            {
+                MessageBox.Show("Введены недопустимые символы", "Ошибка!",
+                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InputTextBox.Clear();
+            }
+
+            else
+            {
+                InputTextBox.Text += " - ";
+                TextBox.Text += InputTextBox.Text;
+                InputTextBox.Clear();
+            }
         }
 
         private void MultiplyButton_Click(object sender, EventArgs e)
         {
-            InputTextBox.Text += " * ";
-            TextBox.Text += InputTextBox.Text;
-            InputTextBox.Clear();
+            if (!rgx.IsMatch(InputTextBox.Text))
+            {
+                MessageBox.Show("Введены недопустимые символы", "Ошибка!",
+                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InputTextBox.Clear();
+            }
+
+            else
+            {
+                InputTextBox.Text += " * ";
+                TextBox.Text += InputTextBox.Text;
+                InputTextBox.Clear();
+            }
         }
 
         private void DivideButton_Click(object sender, EventArgs e)
         {
-            InputTextBox.Text += " / ";
-            TextBox.Text += InputTextBox.Text;
+            if (!rgx.IsMatch(InputTextBox.Text))
+            {
+                MessageBox.Show("Введены недопустимые символы", "Ошибка!",
+                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                InputTextBox.Clear();
+            }
+
+            else
+            {
+                InputTextBox.Text += " / ";
+                TextBox.Text += InputTextBox.Text;
+                InputTextBox.Clear();
+            }
+        }     
+
+        private void SinButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Text = "sin(" + InputTextBox.Text + ")";
+            InputTextBox.Clear();
+        }
+
+        private void CosButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Text = "cos(" + InputTextBox.Text + ")";
+            InputTextBox.Clear();
+        }
+
+        private void TgButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Text = "tg(" + InputTextBox.Text + ")";
+            InputTextBox.Clear();
+        }
+
+        private void CtgButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Text = "ctg(" + InputTextBox.Text + ")";
+            InputTextBox.Clear();
+        }
+
+        //очистить текстбоксы
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Clear();
             InputTextBox.Clear();
         }
 
@@ -90,6 +167,7 @@ namespace Calculator
                 InputTextBox.Text = InputTextBox.Text.Remove(InputTextBox.Text.Length - 1, 1);
         }
 
+        //нажатие знака "равно"
         private void ResultButton_Click(object sender, EventArgs e)
         {
 
@@ -104,14 +182,7 @@ namespace Calculator
             else      //разделение строки из текстбокса на 2 операнда
             {
                 TextBox.Text += InputTextBox.Text;
-                InputTextBox.Clear();
-
-                //it will need later
-                char plus = '+';
-                char minus = '-';
-                char division = '/';
-                char multiplication = '*';
-                
+                InputTextBox.Clear();                
 
                 char[] signs = { '+', '-', '*', '/' };
                 int op1, op2;
@@ -125,7 +196,7 @@ namespace Calculator
                     buf += TextBox.Text[i];
                 }
 
-                op1 = Int32.Parse(buf);  //здесь должен быть перевод, организованный свойством класса Data
+                op1 = Int32.Parse(buf);  //здесь должен быть крутой перевод, организованный свойством класса Data
                 buf = String.Empty;
                 for (int i = ind + 2; i < TextBox.Text.Length; i++)
                 {
@@ -133,6 +204,28 @@ namespace Calculator
                 }
 
                 op2 = Int32.Parse(buf);   //и здесь тоже
+
+
+                if(InputTextBox.Text.Contains("+"))
+                {
+                    //операция сложения
+                }
+
+                if (InputTextBox.Text.Contains("-"))
+                {
+                    //операция вычитания
+                }
+
+                if (InputTextBox.Text.Contains("*"))
+                {
+                    //операция умножения
+                }
+
+                if (InputTextBox.Text.Contains("-"))
+                {
+                    //операция деления
+                }
+
             }
 
         }
@@ -141,15 +234,5 @@ namespace Calculator
         {
 
         }
-
-        private void DegreeButton_Click(object sender, EventArgs e)
-        {   InputTextBox.Text += " ° ";   }
-
-        private void MunuteButton_Click(object sender, EventArgs e)
-        {   InputTextBox.Text += " ′ ";   }
-
-        private void SecondButton_Click_1(object sender, EventArgs e)
-        {   InputTextBox.Text += " ″ ";   }
-
     }
 }
