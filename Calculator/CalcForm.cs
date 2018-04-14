@@ -170,6 +170,7 @@ namespace Calculator
         //нажатие знака "равно"
         private void ResultButton_Click(object sender, EventArgs e)
         {
+            Calculator calc = new Calculator();
 
             if (!rgx.IsMatch(TextBox.Text) || !rgx.IsMatch(InputTextBox.Text))
             {
@@ -185,45 +186,97 @@ namespace Calculator
                 InputTextBox.Clear();                
 
                 char[] signs = { '+', '-', '*', '/' };
-                int op1, op2;
-
-                int ind;
-
-                ind = TextBox.Text.IndexOfAny(signs);
-                string buf = String.Empty;
-                for (int i = 0; i < ind - 1; i++)
+                int op1=0, op2=0;
+                Angle Oper1=new Angle();
+                //Если требуется найти только синус, косинус и т.д. - то операнд только 1
+                if (TextBox.Text.Contains("sin") || TextBox.Text.Contains("cos") || TextBox.Text.Contains("tg") || TextBox.Text.Contains("ctg"))
                 {
-                    buf += TextBox.Text[i];
+                    string arg = TextBox.Text.Substring(TextBox.Text.IndexOf('(') + 1, TextBox.Text.IndexOf(')') - TextBox.Text.IndexOf('(') - 1);
+                    Oper1 = calc.ToAngle(arg);
+                    string Result;
+                    if (TextBox.Text.Contains("sin"))
+                        Result = calc.Sinus(Oper1);
+                    else if (TextBox.Text.Contains("cos"))
+                        Result = calc.Cosinus(Oper1);
+                    else if (TextBox.Text.Contains("tg"))
+                        Result = calc.Tangens(Oper1);
+                    else Result = calc.Cotangens(Oper1);
                 }
-
-                op1 = Int32.Parse(buf);  //здесь должен быть крутой перевод, организованный свойством класса Data
-                buf = String.Empty;
-                for (int i = ind + 2; i < TextBox.Text.Length; i++)
+                else
                 {
-                    buf += TextBox.Text[i];
-                }
+                    Angle Oper2 = new Angle();//Операнды должны быть ИЛИ класса Angle ИЛИ инт
+                                              //Т.к. может быть как сумма углов, так и const*угол
+                    int ind;
 
-                op2 = Int32.Parse(buf);   //и здесь тоже
+                    ind = TextBox.Text.IndexOfAny(signs);
+                    string buf = String.Empty;
+                    for (int i = 0; i < ind - 1; i++)
+                    {
+                        buf += TextBox.Text[i];
+                    }
+                    if (buf.Contains("°"))
+                    {
+                        Oper1 = calc.ToAngle(buf);
+                    }
+                    else
+                    {
+                        op1 = Int32.Parse(buf);
+                    }
+                    //op1 = Int32.Parse(buf);  //здесь должен быть крутой перевод, организованный свойством класса Data
+                    buf = String.Empty;
+                    for (int i = ind + 2; i < TextBox.Text.Length; i++)
+                    {
+                        buf += TextBox.Text[i];
+                    }
+                    if (buf.Contains("°"))
+                    {
+                        Oper2 = calc.ToAngle(buf);
+                    }
+                    else
+                    {
+                        op2 = Int32.Parse(buf);
+                    }
+                    //op2 = Int32.Parse(buf);   //и здесь тоже
+                    Angle result = new Angle();
+                    double res;
+                    if (InputTextBox.Text.Contains("+"))
+                    {
+                        //операция сложения
+                        result = calc.Summa(Oper1, Oper2);
+                    }
 
+                    if (InputTextBox.Text.Contains("-"))
+                    {
+                        //операция вычитания
+                        result = calc.Raznost(Oper1, Oper2);
+                    }
 
-                if(InputTextBox.Text.Contains("+"))
-                {
-                    //операция сложения
-                }
+                    if (InputTextBox.Text.Contains("*"))
+                    {
+                        //операция умножения
+                        if (op1 == 0 && Oper1.ToRadians() != 0)
+                        {
+                            result = calc.Multiply(op2, Oper1);
+                        }
+                        else
+                        {
+                            result = calc.Multiply(op1, Oper2);
+                        }
+                    }
 
-                if (InputTextBox.Text.Contains("-"))
-                {
-                    //операция вычитания
-                }
-
-                if (InputTextBox.Text.Contains("*"))
-                {
-                    //операция умножения
-                }
-
-                if (InputTextBox.Text.Contains("-"))
-                {
-                    //операция деления
+                    if (InputTextBox.Text.Contains("/"))
+                    {
+                        if (Oper2.ToRadians() == 0 && op2 == 0) res = Int32.MaxValue;
+                        if (op1 == 0 && Oper1.ToRadians() != 0)
+                        {
+                            result = calc.Division(Oper1, op2);
+                        }
+                        else
+                        {
+                            result = calc.Division(op1, Oper2);
+                        }
+                        //операция деления
+                    }
                 }
 
             }
