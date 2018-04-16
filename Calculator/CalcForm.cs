@@ -76,6 +76,8 @@ namespace Calculator
                 InputTextBox.Text += " + ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -93,6 +95,8 @@ namespace Calculator
                 InputTextBox.Text += " - ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -110,6 +114,8 @@ namespace Calculator
                 InputTextBox.Text += " * ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -127,6 +133,8 @@ namespace Calculator
                 InputTextBox.Text += " / ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }     
 
@@ -159,6 +167,8 @@ namespace Calculator
         {
             TextBox.Clear();
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
         }
 
         private void EraseButton_Click(object sender, EventArgs e)
@@ -178,12 +188,16 @@ namespace Calculator
                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TextBox.Clear();
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
             }
 
             else      //разделение строки из текстбокса на 2 операнда
             {
-                TextBox.Text += InputTextBox.Text + " = ";
-                InputTextBox.Clear();                
+                TextBox.Text += InputTextBox.Text;
+                InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
 
                 char[] signs = { '+', '-', '*', '/' };
                 int op1=0, op2=0;
@@ -216,7 +230,7 @@ namespace Calculator
                     {
                         buf += TextBox.Text[i];
                     }
-                    if (buf.Contains("°"))
+                    if (buf.Contains("°")|| buf.Contains("′") || buf.Contains("″"))
                     {
                         Oper1 = calc.ToAngle(buf);
                     }
@@ -230,7 +244,7 @@ namespace Calculator
                     {
                         buf += TextBox.Text[i];
                     }
-                    if (buf.Contains("°"))
+                    if (buf.Contains("°") || buf.Contains("′") || buf.Contains("″"))
                     {
                         Oper2 = calc.ToAngle(buf);
                     }
@@ -240,19 +254,20 @@ namespace Calculator
                     }
 
                     Angle result = new Angle();
-                    if (InputTextBox.Text.Contains("+"))
+                    if (TextBox.Text.Contains("+"))
                     {
                         //операция сложения
                         result = calc.Summa(Oper1, Oper2);
+                        
                     }
-
-                    if (InputTextBox.Text.Contains("-"))
+                    else
+                    if (TextBox.Text.Contains("-"))
                     {
                         //операция вычитания
                         result = calc.Raznost(Oper1, Oper2);
                     }
-
-                    if (InputTextBox.Text.Contains("*"))
+                    else
+                    if (TextBox.Text.Contains("*"))
                     {
                         //операция умножения
                         if (op1 == 0 && Oper1.ToRadian() != 0)
@@ -265,7 +280,7 @@ namespace Calculator
                         }
                     }
                     int res;
-                    if (InputTextBox.Text.Contains("/"))
+                    if (TextBox.Text.Contains("/"))
                         //операция деления
                     {
                         if (Oper2.ToRadian() == 0 && op2 == 0)
@@ -279,14 +294,10 @@ namespace Calculator
                             {
                                 result = calc.Division(Oper1, op2);
                             }
-                            else
-                            {
-                                result = calc.Division(op1, Oper2);
-                            }
                         }
                     }
                     //результат
-                    TextBox.Text += result.ToString();
+                    TextBox.Text += " = " + result.ToString();
                 }
             }
         }

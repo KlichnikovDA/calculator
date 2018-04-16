@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Calculator
-{  
+{
     class Calculator
     {
         /*public Angle ReadForFunctions1Angle(CalcForm f1) //Считывание угла для работы
@@ -31,30 +31,26 @@ namespace Calculator
         }*/
         public Angle ToAngle(string input)
         {
-            int degree=0,minute=0,second=0;
+            int degree = 0, minute = 0, second = 0;
             int deg = input.IndexOf('°');
-            if (deg != 0)
+            if (deg != -1)
             {
                 string degrees = input.Substring(0, deg);
                 Int32.TryParse(degrees, out degree);
-                int min= input.IndexOf('′');
-                if (min != -1)
-                {
-                    string minut = input.Substring(deg + 1, min - deg - 1);
-                    Int32.TryParse(minut, out minute);
-                    int sec = input.IndexOf("′′");
-                    if (sec != -1)
-                    {
-                        string seconds = input.Substring(min + 1, sec - min - 1);
-                        Int32.TryParse(seconds, out second);
-                    }
-                }
-                return new Angle(degree, minute, second);
             }
-            else
+            int min = input.IndexOf('′');
+            if (min != -1)
             {
-                return new Angle(0, 0, 0);
+                string minut = input.Substring(deg + 1, min - deg - 1);
+                Int32.TryParse(minut, out minute);
             }
+            int sec = input.IndexOf("″");
+            if (sec != -1)
+            {
+                string seconds = input.Substring(min + 1, sec - min - 2);
+                Int32.TryParse(seconds, out second);
+            }
+            return new Angle(degree, minute, second);
         }
         public Angle Summa(Angle a, Angle b)
         {
@@ -71,7 +67,7 @@ namespace Calculator
         public Angle Multiply(int a, Angle b)
         {
             Angle mp = new Angle();
-            mp = a*b;//Перегруженная операция
+            mp = a * b;//Перегруженная операция
             return mp;
         }
         public Angle Multiply(Angle a, int b)
@@ -81,12 +77,6 @@ namespace Calculator
             return mp;
         }
         public Angle Division(Angle a, int b)
-        {
-            Angle dv = new Angle();
-            dv = a / b;//Перегруженная операция
-            return dv;
-        }
-        public Angle Division(int a, Angle b)
         {
             Angle dv = new Angle();
             dv = a / b;//Перегруженная операция
@@ -110,7 +100,7 @@ namespace Calculator
         public string Cotangens(Angle inp)
         {
             double rad = inp.ToRadian();//Перегрузка ToRadians - для перевода в радианы
-            return (Math.Cos(rad)/Math.Sin(rad)).ToString();
+            return (Math.Cos(rad) / Math.Sin(rad)).ToString();
         }
         /*public void OutputResult(CalcForm f1, Angle res)//Вывод итогового угла
             //Не подходит для тригонометр. операций
