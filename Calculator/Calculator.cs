@@ -94,22 +94,22 @@ namespace Calculator
         }
         public string Sinus(Angle inp)
         {
-            double rad = inp.ToRadians();//Перегрузка ToRadians - для перевода в радианы
+            double rad = inp.ToRadian();//Перегрузка ToRadians - для перевода в радианы
             return Math.Sin(rad).ToString();
         }
         public string Cosinus(Angle inp)
         {
-            double rad = inp.ToRadians();//Перегрузка ToRadians - для перевода в радианы
+            double rad = inp.ToRadian();//Перегрузка ToRadians - для перевода в радианы
             return Math.Cos(rad).ToString();
         }
         public string Tangens(Angle inp)
         {
-            double rad = inp.ToRadians();//Перегрузка ToRadians - для перевода в радианы
+            double rad = inp.ToRadian();//Перегрузка ToRadians - для перевода в радианы
             return Math.Tan(rad).ToString();
         }
         public string Cotangens(Angle inp)
         {
-            double rad = inp.ToRadians();//Перегрузка ToRadians - для перевода в радианы
+            double rad = inp.ToRadian();//Перегрузка ToRadians - для перевода в радианы
             return (Math.Cos(rad)/Math.Sin(rad)).ToString();
         }
         /*public void OutputResult(CalcForm f1, Angle res)//Вывод итогового угла

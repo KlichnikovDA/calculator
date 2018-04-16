@@ -182,7 +182,7 @@ namespace Calculator
 
             else      //разделение строки из текстбокса на 2 операнда
             {
-                TextBox.Text += InputTextBox.Text;
+                TextBox.Text += InputTextBox.Text + " = ";
                 InputTextBox.Clear();                
 
                 char[] signs = { '+', '-', '*', '/' };
@@ -201,6 +201,8 @@ namespace Calculator
                     else if (TextBox.Text.Contains("tg"))
                         Result = calc.Tangens(Oper1);
                     else Result = calc.Cotangens(Oper1);
+                    //вывод результата
+                    TextBox.Text += Result;
                 }
                 else
                 {
@@ -222,7 +224,7 @@ namespace Calculator
                     {
                         op1 = Int32.Parse(buf);
                     }
-                    //op1 = Int32.Parse(buf);  //здесь должен быть крутой перевод, организованный свойством класса Data
+
                     buf = String.Empty;
                     for (int i = ind + 2; i < TextBox.Text.Length; i++)
                     {
@@ -236,9 +238,8 @@ namespace Calculator
                     {
                         op2 = Int32.Parse(buf);
                     }
-                    //op2 = Int32.Parse(buf);   //и здесь тоже
+
                     Angle result = new Angle();
-                    double res;
                     if (InputTextBox.Text.Contains("+"))
                     {
                         //операция сложения
@@ -254,7 +255,7 @@ namespace Calculator
                     if (InputTextBox.Text.Contains("*"))
                     {
                         //операция умножения
-                        if (op1 == 0 && Oper1.ToRadians() != 0)
+                        if (op1 == 0 && Oper1.ToRadian() != 0)
                         {
                             result = calc.Multiply(op2, Oper1);
                         }
@@ -263,29 +264,31 @@ namespace Calculator
                             result = calc.Multiply(op1, Oper2);
                         }
                     }
-
+                    int res;
                     if (InputTextBox.Text.Contains("/"))
+                        //операция деления
                     {
-                        if (Oper2.ToRadians() == 0 && op2 == 0) res = Int32.MaxValue;
-                        if (op1 == 0 && Oper1.ToRadians() != 0)
+                        if (Oper2.ToRadian() == 0 && op2 == 0)
                         {
-                            result = calc.Division(Oper1, op2);
+                            res = Int32.MaxValue;
+                            TextBox.Text += res;
                         }
                         else
                         {
-                            result = calc.Division(op1, Oper2);
+                            if (op1 == 0 && Oper1.ToRadian() != 0)
+                            {
+                                result = calc.Division(Oper1, op2);
+                            }
+                            else
+                            {
+                                result = calc.Division(op1, Oper2);
+                            }
                         }
-                        //операция деления
                     }
+                    //результат
+                    TextBox.Text += result.ToString();
                 }
-
             }
-
-        }
-
-        private void Test_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
