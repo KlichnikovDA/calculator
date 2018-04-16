@@ -72,28 +72,28 @@ namespace Calculator
         }
 
         // Перегрузка оператора *
-        public static Angle operator *(Angle A1, double Mult)
+        public static Angle operator *(Angle A1, int Mult)
         {
             int Result = (A1.Degree * 3600 + A1.Minute * 60 + A1.Second) * Mult;
             return new Angle(Result / 3600, Result % 3600 / 60, Result % 60);            
         }
 
         // Перегрузка оператора *
-        public static Angle operator *(double Mult, Angle A1)
+        public static Angle operator *(int Mult, Angle A1)
         {
             int Result = (A1.Degree * 3600 + A1.Minute * 60 + A1.Second) * Mult;
             return new Angle(Result / 3600, Math.Abs(Result % 3600 / 60), Math.Abs(Result % 60));
         }
 
         // Перегрузка оператора /
-        public static Angle operator /(Angle A1, double Div)
+        public static Angle operator /(Angle A1, int Div)
         {
             int Result = (A1.Degree * 3600 + A1.Minute * 60 + A1.Second) / Div;
             return new Angle(Result / 3600, Math.Abs(Result % 3600 / 60), Math.Abs(Result % 60));
         }
 
         // Перегрузка оператора /
-        public static Angle operator /(double Div, Angle A1)
+        public static Angle operator /(int Div, Angle A1)
         {
             int Result = (A1.Degree * 3600 + A1.Minute * 60 + A1.Second) / Div;
             return new Angle(Result / 3600, Math.Abs(Result % 3600 / 60), Math.Abs(Result % 60));
