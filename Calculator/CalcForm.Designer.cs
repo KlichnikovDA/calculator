@@ -374,7 +374,6 @@
             this.Controls.Add(this.InputTextBox);
             this.Name = "CalcForm";
             this.Text = "Calculator";
-            this.Load += new System.EventHandler(this.Test_Load);
             this.ResumeLayout(false);
 
         }

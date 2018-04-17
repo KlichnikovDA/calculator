@@ -76,6 +76,8 @@ namespace Calculator
                 InputTextBox.Text += " + ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -93,6 +95,8 @@ namespace Calculator
                 InputTextBox.Text += " - ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -110,6 +114,8 @@ namespace Calculator
                 InputTextBox.Text += " * ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }
 
@@ -127,6 +133,8 @@ namespace Calculator
                 InputTextBox.Text += " / ";
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = false;
             }
         }     
 
@@ -134,24 +142,40 @@ namespace Calculator
         {
             TextBox.Text = "sin(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled = 
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void CosButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "cos(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void TgButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "tg(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void CtgButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "ctg(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         //очистить текстбоксы
@@ -159,6 +183,10 @@ namespace Calculator
         {
             TextBox.Clear();
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
         }
 
         private void EraseButton_Click(object sender, EventArgs e)
@@ -170,6 +198,7 @@ namespace Calculator
         //нажатие знака "равно"
         private void ResultButton_Click(object sender, EventArgs e)
         {
+            Calculator calc = new Calculator();
 
             if (!rgx.IsMatch(TextBox.Text) || !rgx.IsMatch(InputTextBox.Text))
             {
@@ -177,62 +206,122 @@ namespace Calculator
                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TextBox.Clear();
                 InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                    button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                    button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
             }
 
             else      //разделение строки из текстбокса на 2 операнда
             {
                 TextBox.Text += InputTextBox.Text;
-                InputTextBox.Clear();                
+                InputTextBox.Clear();
+                PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                    button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                    button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
 
                 char[] signs = { '+', '-', '*', '/' };
-                int op1, op2;
-
-                int ind;
-
-                ind = TextBox.Text.IndexOfAny(signs);
-                string buf = String.Empty;
-                for (int i = 0; i < ind - 1; i++)
+                int op1=0, op2=0;
+                Angle Oper1=new Angle();
+                //Если требуется найти только синус, косинус и т.д. - то операнд только 1
+                if (TextBox.Text.Contains("sin") || TextBox.Text.Contains("cos") || TextBox.Text.Contains("tg") || TextBox.Text.Contains("ctg"))
                 {
-                    buf += TextBox.Text[i];
+                    string arg = TextBox.Text.Substring(TextBox.Text.IndexOf('(') + 1, TextBox.Text.IndexOf(')') - TextBox.Text.IndexOf('(') - 1);
+                    Oper1 = calc.ToAngle(arg);
+                    string Result;
+                    if (TextBox.Text.Contains("sin"))
+                        Result = calc.Sinus(Oper1);
+                    else if (TextBox.Text.Contains("cos"))
+                        Result = calc.Cosinus(Oper1);
+                    else if (TextBox.Text.Contains("tg"))
+                        Result = calc.Tangens(Oper1);
+                    else Result = calc.Cotangens(Oper1);
+                    //вывод результата
+                    TextBox.Text += " = " + Result;
                 }
-
-                op1 = Int32.Parse(buf);  //здесь должен быть крутой перевод, организованный свойством класса Data
-                buf = String.Empty;
-                for (int i = ind + 2; i < TextBox.Text.Length; i++)
+                else
                 {
-                    buf += TextBox.Text[i];
+                    Angle Oper2 = new Angle();//Операнды должны быть ИЛИ класса Angle ИЛИ инт
+                                              //Т.к. может быть как сумма углов, так и const*угол
+                    int ind;
+
+                    ind = TextBox.Text.IndexOfAny(signs);
+                    string buf = String.Empty;
+                    for (int i = 0; i < ind - 1; i++)
+                    {
+                        buf += TextBox.Text[i];
+                    }
+                    if (buf.Contains("°")|| buf.Contains("′") || buf.Contains("″"))
+                    {
+                        Oper1 = calc.ToAngle(buf);
+                    }
+                    else
+                    {
+                        op1 = Int32.Parse(buf);
+                    }
+
+                    buf = String.Empty;
+                    for (int i = ind + 2; i < TextBox.Text.Length; i++)
+                    {
+                        buf += TextBox.Text[i];
+                    }
+                    if (buf.Contains("°") || buf.Contains("′") || buf.Contains("″"))
+                    {
+                        Oper2 = calc.ToAngle(buf);
+                    }
+                    else
+                    {
+                        op2 = Int32.Parse(buf);
+                    }
+
+                    Angle result = new Angle();
+                    if (TextBox.Text.Contains("+"))
+                    {
+                        //операция сложения
+                        result = calc.Summa(Oper1, Oper2);
+                        
+                    }
+                    else
+                    if (TextBox.Text.Contains("-"))
+                    {
+                        //операция вычитания
+                        result = calc.Raznost(Oper1, Oper2);
+                    }
+                    else
+                    if (TextBox.Text.Contains("*"))
+                    {
+                        //операция умножения
+                        if (op1 == 0 && Oper1.ToRadian() != 0)
+                        {
+                            result = calc.Multiply(op2, Oper1);
+                        }
+                        else
+                        {
+                            result = calc.Multiply(op1, Oper2);
+                        }
+                    }
+                    int res;
+                    if (TextBox.Text.Contains("/"))
+                        //операция деления
+                    {
+                        if (Oper2.ToRadian() == 0 && op2 == 0)
+                        {
+                            res = Int32.MaxValue;
+                            TextBox.Text += res;
+                        }
+                        else
+                        {
+                            if (op1 == 0 && Oper1.ToRadian() != 0)
+                            {
+                                result = calc.Division(Oper1, op2);
+                            }
+                        }
+                    }
+                    //результат
+                    TextBox.Text += " = " + result.ToString();
                 }
-
-                op2 = Int32.Parse(buf);   //и здесь тоже
-
-
-                if(InputTextBox.Text.Contains("+"))
-                {
-                    //операция сложения
-                }
-
-                if (InputTextBox.Text.Contains("-"))
-                {
-                    //операция вычитания
-                }
-
-                if (InputTextBox.Text.Contains("*"))
-                {
-                    //операция умножения
-                }
-
-                if (InputTextBox.Text.Contains("-"))
-                {
-                    //операция деления
-                }
-
             }
-
-        }
-
-        private void Test_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
