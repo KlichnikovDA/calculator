@@ -142,24 +142,40 @@ namespace Calculator
         {
             TextBox.Text = "sin(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled = 
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void CosButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "cos(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void TgButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "tg(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         private void CtgButton_Click(object sender, EventArgs e)
         {
             TextBox.Text = "ctg(" + InputTextBox.Text + ")";
             InputTextBox.Clear();
+            PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = false;
         }
 
         //очистить текстбоксы
@@ -168,7 +184,9 @@ namespace Calculator
             TextBox.Clear();
             InputTextBox.Clear();
             PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
-                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
+                CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
         }
 
         private void EraseButton_Click(object sender, EventArgs e)
@@ -189,7 +207,9 @@ namespace Calculator
                 TextBox.Clear();
                 InputTextBox.Clear();
                 PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
-                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                    button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                    button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
             }
 
             else      //разделение строки из текстбокса на 2 операнда
@@ -197,7 +217,9 @@ namespace Calculator
                 TextBox.Text += InputTextBox.Text;
                 InputTextBox.Clear();
                 PlusButton.Enabled = MinusButton.Enabled = MultiplyButton.Enabled = DivideButton.Enabled = SinButton.Enabled =
-                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = true;
+                    CosButton.Enabled = TgButton.Enabled = CtgButton.Enabled = button0.Enabled = button1.Enabled = button2.Enabled =
+                    button3.Enabled = button4.Enabled = button5.Enabled = button6.Enabled = button7.Enabled = button8.Enabled =
+                    button9.Enabled = DegreeButton.Enabled = MunuteButton.Enabled = SecondButton.Enabled = true;
 
                 char[] signs = { '+', '-', '*', '/' };
                 int op1=0, op2=0;
@@ -216,7 +238,7 @@ namespace Calculator
                         Result = calc.Tangens(Oper1);
                     else Result = calc.Cotangens(Oper1);
                     //вывод результата
-                    TextBox.Text += Result;
+                    TextBox.Text += " = " + Result;
                 }
                 else
                 {
